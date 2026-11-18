@@ -1,18 +1,17 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+﻿import { Stack } from "expo-router";
+import { colores } from "@/shared/theme/colores";
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
-
-SplashScreen.preventAutoHideAsync();
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+export default function RootLayout() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <Stack
+      screenOptions={{
+        headerStyle: { backgroundColor: colores.superficie },
+        headerTintColor: colores.texto,
+      }}
+    >
+      <Stack.Screen name="index" options={{ title: "Catálogo de Videojuegos" }} />
+      <Stack.Screen name="videojuegos/nuevo" options={{ title: "Registrar videojuego" }} />
+      <Stack.Screen name="videojuegos/[id]" options={{ title: "Editar videojuego" }} />
+    </Stack>
   );
 }
